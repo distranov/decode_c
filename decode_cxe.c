@@ -21,7 +21,8 @@ int main(int argc, char *argv[]) {
     }
     
     printf("packet type: %d \n", f2d_openfile(argv[1]));
-    param_init("list_param.cfg");   
+    //param_init("list_param.cfg");  
+    param_init_new("list_param.cfg");
 
 // conversion filename to *.csv
     *strstr(argv[1], ".CXE") = 0;
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
                                          rec.cell[0][5][7].volt,
                                          rec.cell[0][5][8].volt,
                                          rec.cell[0][13][9].volt);
-        printf("%s", param_data2str(&rec));
+        //printf("%s", param_data2str(&rec));
 
 
         break;                                         
@@ -53,7 +54,7 @@ int main(int argc, char *argv[]) {
 
 
 
-    printf("\n");
+    printf("end \n");
     fclose(ofile);
 }
 

@@ -32,13 +32,17 @@ typedef struct {
     uint32_t         start_bit;
     double           factor;
     double           offset;
-} param_table_struct;
+} param_struct;
 
 
 
 
 void param_init(const char *filename);
+void param_init_new(const char *filename);
+
+
 char *param_data2str(rec_struct *rec);
 
+void param_cut_string(char *str, char sym);
 
 #endif

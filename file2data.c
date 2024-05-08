@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "crc32.h"
 #include "file2data.h"
