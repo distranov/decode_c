@@ -14,7 +14,11 @@ typedef enum {
     PARAM_TYPE_INT8     = 3,
     PARAM_TYPE_UINT8    = 4,
     PARAM_TYPE_DATETIME = 5,
-    PARAM_TYPE_ENUM     = 6
+    PARAM_TYPE_ENUM     = 6,
+    PARAM_TYPE_MB       = 7,
+    PARAM_TYPE_SMA      = 8,
+    PARAM_TYPE_CELL     = 9,
+    
 } param_type_enum;
 
 typedef struct {
@@ -38,11 +42,8 @@ typedef struct {
 
 
 void param_init(const char *filename);
-void param_init_new(const char *filename);
-
-
 char *param_data2str(rec_struct *rec);
+char *param_header(void);
 
-void param_cut_string(char *str, char sym);
 
 #endif
