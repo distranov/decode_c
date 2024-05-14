@@ -18,8 +18,6 @@ typedef enum {
     F2D_REC_END  = 1,
 } f2d_status;
 
-
-
 typedef struct {
     uint8_t  dev_type;
     uint8_t  bat_type;
@@ -287,6 +285,111 @@ typedef struct {
 } __attribute__ ((__packed__)) mb100_ram_struct;
 
 typedef struct {
+    // Data1
+    int16_t  cur;                         // 0.1A ток
+    uint16_t volt;                        // 0.1V напряжение
+    // Data2
+    uint16_t soc;                         // 0.1%
+    uint16_t cell_volt_min;               // 0.001V максимальное напряжение ячеек
+    uint16_t cell_volt_max;               // 0.001V минимальное напряжение ячеек
+    // Data3
+    int16_t  cell_temp_min;               // 0.1°C максимальная температура ячеек
+    int16_t  cell_temp_max;               // 0.1°C минимальная температура ячеек
+    int16_t  cell_temp_avg;               // 0.1°C средняя температура ячеек
+    // Data4
+    uint16_t charge_bat;                  // 0.01Аh текущий заряд батареи
+    uint16_t cell_bal_cnt;                // число ячеек участвующих в балансировке
+    // Data5
+    uint16_t cur_lim_dischrg;             // 0.1 A ограничение тока разряда
+    uint16_t cur_lim_chrg;                // 0.1 A ограничение тока заряда
+    // Data6
+    uint16_t volt_bus;                    // 0.1 V напряжение высоковольтной шины со стороны ТС
+    uint16_t volt_ign;                    // 0.1 V напряжения низковольтного питания со стороны ТС
+    int8_t  temp_cool_intake;             // 0.1  °C температура охлаждающей жидкости на входе СНЭ
+    int8_t  temp_cool_outlet;             // 0.1  °C температура охлаждающей жидкости на выходе СНЭ
+    int8_t  temp_air_amb;                 // 0.1  °C температура воздуха окружающей среды
+    int8_t  temp_air_int;                 // 0.1  °C температура воздуха внутри модуля
+    // Data7
+    uint16_t charger_volt_lim;            // 0.1 V максимальное напряжение зарядной станции
+    // Data8
+    uint8_t  cell_volt_max_mod_num;       // 1 номер модуля где расположена ячейка с максимальным напряжением
+    uint8_t  cell_volt_max_num;           // 1 номер ячейки с максимальным напряжением в указанном модуле
+    uint8_t  cell_volt_min_mod_num;       // 1 номер модуля где расположена ячейка с минимальным напряжением
+    uint8_t  cell_volt_min_num;           // 1 номер ячейки с минимальным напряжением в указанном модуле
+    uint16_t cell_volt_avg;               // 0.001V среднее напряжение ячеек
+    // Data9
+    uint8_t  cell_temp_max_mod_num;       // 1 номер модуля где расположена ячейка с максимальной температурой
+    uint8_t  cell_temp_max_num;           // 1 номер ячейки с максимальной температурой в указанном модуле
+    uint8_t  cell_temp_min_mod_num;       // 1 номер модуля где расположена ячейка с минимальной температурой
+    uint8_t  cell_temp_min_num;           // 1 номер ячейки с минимальной температурой в указанном модуле
+    // Data10
+    // Data11
+    // Status1
+    struct {
+        uint64_t bus_pos_con_st       : 2;   // BF состояние положительного HV контактора
+        uint64_t bus_neg_con_st       : 2;   // BF состояние отрицательного HV контактора
+        uint64_t bus_disc_forewar     : 4;   // BF подготовка к отключению от шины и причина
+        uint64_t bus_prechrg_relay_st : 2;   // BF состояние реле предзаряда шины
+        uint64_t center_con_st        : 2;   // BF состояние центрального контактора
+        uint64_t bus_actv_isol_st     : 4;   // BF состояние активного теста изоляции
+        uint64_t bus_pasv_isol_st     : 4;   // BF состояние пассивного теста изоляции
+        uint64_t hvil_st              : 2;   // BF состояние контура блокировки HVIL
+        uint64_t acc_st               : 2;   // BF состояние датчика инерции(акселерометра)
+        uint64_t soc_st               : 4;   // BF состояние soc
+        uint64_t cell_bal_st          : 2;   // BF "сбалансированность" системы
+        uint64_t cell_bal_actv        : 2;   // BF состояние процесса балансировки
+        uint64_t int_chrgr_st         : 4;   // BF состояние внутреннего зарядного устройства
+        uint64_t hves_st_counter      : 4;   // BF контрольный таймер "зависания"
+        uint64_t bus_conn_st          : 4;   // BF состояние подключения СНЭ к шине
+        uint64_t hves_oper_st         : 4;   // BF режим работы СНЭ
+        uint64_t num_of_esp_rdy       : 8;   // 1 число параллельно подключенных МБ к шине
+        uint64_t hves_st_crc          : 8;   // 1 контрольная сумма
+    } status1;
+    // Status2
+    struct {
+        uint64_t dpl_soc      : 2;           // BF ограничение мощности разряда из-за soc
+        uint64_t dpl_temp     : 2;           // BF ограничение мощности разряда из-за температуры
+        uint64_t dpl_bat_diag : 2;           // BF ограничение мощности разряда из-за диагностики батареи
+        uint64_t dpl_volt     : 2;           // BF ограничение мощности разряда из-за напряжения СНЭ или отдельной ячейки
+        uint64_t dpl_cur      : 2;           // BF ограничение мощности разряда из-за тока батареи
+        uint64_t dpl_undef    : 2;           // BF ограничение мощности разряда из-за неопределенной причины
+        uint64_t dpl_res      : 20;          // BF резерв
+        uint64_t cpl_soc      : 2;           // BF ограничение мощности заряда из-за soc
+        uint64_t cpl_temp     : 2;           // BF ограничение мощности заряда из-за температуры
+        uint64_t cpl_bat_diag : 2;           // BF ограничение мощности заряда из-за диагностики батареи
+        uint64_t cpl_volt     : 2;           // BF ограничение мощности заряда из-за напряжения СНЭ или отдельной ячейки
+        uint64_t cpl_cur      : 2;           // BF ограничение мощности заряда из-за тока батареи
+        uint64_t cpl_undef    : 2;           // BF ограничение мощности заряда из-за неопределенной причины
+        uint64_t cpl_res      : 20;          // BF резерв
+    } status2;
+    // pgn = 65502
+    uint32_t intfault;                    // BF слово отказов внутренних
+    uint32_t extfault;                    // BF слово отказов внешних
+    // pgn = 65503
+    uint16_t on;                          // 1   число включений
+    uint16_t moto;                        // час время наработки
+    uint16_t autonom_run;                 // км  пробег в режиме автономного хода
+    uint16_t total_run;                   // км  общий пробег
+    // pgn = 65504
+    uint16_t num_of_charges;              // 1  число зарядок
+    uint16_t energy_in;                   // Ah принятая энергия
+    uint16_t energy_out;                  // Ah выданная энергия
+    uint16_t energy_heat;                 // Ah выданная энергия
+    // pgn = 65505
+    uint16_t num_of_fault_disc;           // число аварийных отключений
+    uint16_t speed;                       // км/ч
+    // pgn = 65506
+    uint32_t state_in;
+    uint32_t state_out;
+    // pgn = 65530
+    uint8_t  pki_cnt;
+    uint8_t  pki_state;
+    uint16_t pki_iso;
+    uint16_t pki_volt;
+    uint16_t pki_pos;
+} __attribute__ ((__packed__)) mb101_ram_struct;
+
+typedef struct {
     uint32_t           start;
     tms_struct         tms;
     bat_struct         bat;
@@ -297,9 +400,33 @@ typedef struct {
     uint32_t           crc32;
 }  __attribute__ ((__packed__)) sdcard_packet100_struct;
 
+typedef struct {
+    uint32_t          start;
+    tms_struct    tms;
+    bat_struct    bat;
+    mb101_ram_struct   mb;
+    sma_struct     sma[14];
+    cell_struct    cell[14][12];
+    uint16_t       soc_kalman;
+    uint8_t        res[22];
+    uint32_t       crc32;
+}  __attribute__ ((__packed__)) sdcard_packet101_struct;
+typedef struct {
+    uint32_t start;
+    uint32_t bub_prog_ver;                // версия и  контрольная сумма ПО
+    uint32_t bub_prog_crc;
+    uint32_t bkz_prog_ver;
+    uint32_t bkz_prog_crc;
+    uint32_t bust_prog_ver;
+    uint32_t bust_prog_crc;
+    uint32_t pki_prog_ver;
+    uint32_t pki_prog_crc;
+    uint32_t crc32;
+}  __attribute__ ((__packed__)) sdcard_packet_info_struct;
+
 typedef union {
     sdcard_packet100_struct packet100;
-
+    sdcard_packet101_struct packet101;
 
 } packet_union;
 
@@ -307,5 +434,7 @@ f2d_packet_version_enum f2d_openfile(const char *filename);
 f2d_status f2d_get_next_packet(rec_struct *rec);
 f2d_status f2d_read_packet(packet_union *packet, size_t len);
 void f2d_data100(packet_union *packet, rec_struct *rec);
+void f2d_data101(packet_union *packet, rec_struct *rec);
+
 
 #endif

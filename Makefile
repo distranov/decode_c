@@ -9,9 +9,11 @@ CFLAGS = -g -Wall # флаг для неявных правил. Он включ
                   # в результат компиляции
 
 
-all: decode_cxe
-	./decode_cxe ./files/16_30.CXE
-
+all: decode_cxe	
+	rm -rf ./files/*.csv
+	./decode_cxe ./files/11_41.CXE
+	./decode_cxe ./files/AA_11_37.CXE	
+	
 decode_cxe: decode_cxe.o crc32.o data2file.o file2data.o param.o
 	$(CC) $(CFLAGS) crc32.o decode_cxe.o data2file.o file2data.o param.o  -o decode_cxe 
 
@@ -28,8 +30,8 @@ param.o: param.c param.h
 	$(CC) $(CFLAGS) -c param.c
 
 data2file.o: data2file.c data2file.h
-	$(CC) $(CFLAGS) -c data2file.c
-	
+	$(CC) $(CFLAGS) -c data2file.c	
 
 clean:
 	rm -rf *.o decode_cxe
+	rm -rf ./files/*.csv

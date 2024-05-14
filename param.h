@@ -18,7 +18,8 @@ typedef enum {
     PARAM_TYPE_MB       = 7,
     PARAM_TYPE_SMA      = 8,
     PARAM_TYPE_CELL     = 9,
-    
+    PARAM_TYPE_INT32    = 10,
+    PARAM_TYPE_UINT32   = 11,
 } param_type_enum;
 
 typedef struct {
@@ -33,17 +34,11 @@ typedef struct {
     char             sconv[32];                       
     param_type_enum  type;
     uint32_t         start_byte;
-    uint32_t         start_bit;
     double           factor;
-    double           offset;
 } param_struct;
 
-
-
-
-void param_init(const char *filename);
+uint8_t param_init(const char *filename);
 char *param_data2str(rec_struct *rec);
 char *param_header(void);
-
 
 #endif

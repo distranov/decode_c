@@ -7,49 +7,51 @@
 #include "param.h"
 //-----------------------------------------------------------------------------
 param_struct param_table[] = {
-    {"bub_date",       "%02.0f", PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.date),    0,   1, 0},
-    {"bub_month",      "%02.0f", PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.month),   0,   1, 0},
-    {"bub_years",      "%02.0f", PARAM_TYPE_UINT16, offsetof(rec_struct, bat.years),   0,   1, 0},
-    {"bub_hours",      "%02.0f", PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.hours),   0,   1, 0},
-    {"bub_minutes",    "%02.0f", PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.minutes), 0,   1, 0},
-    {"bub_seconds",    "%02.0f", PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.seconds), 0,   1, 0},
-    {"bub_dm1",        "%06.0f", PARAM_TYPE_UINT16, offsetof(rec_struct, bat.dm1_spn), 0,   1, 0},
+    {"bub_date",            "%1.0f",  PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.date),             1},
+    {"bub_month",           "%1.0f",  PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.month),            1},
+    {"bub_years",           "%1.0f",  PARAM_TYPE_UINT16, offsetof(rec_struct, bat.years),            1},
+    {"bub_hours",           "%1.0f",  PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.hours),            1},
+    {"bub_minutes",         "%1.0f",  PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.minutes),          1},
+    {"bub_seconds",         "%1.0f",  PARAM_TYPE_UINT8,  offsetof(rec_struct, bat.seconds),          1},
+    {"bub_dm1",             "%1.0f",  PARAM_TYPE_UINT32, offsetof(rec_struct, bat.dm1_spn),          1},
 
+    {"mb",                       "",  PARAM_TYPE_MB,     offsetof(rec_struct, mb),                   0},
+    {"mb_cur",              "%1.1f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  cur),                0.1},
+    {"mb_volt",             "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  volt),               0.1},
+    {"mb_volt_bus",         "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  volt_bus),           0.1},
+    {"mb_charger_volt_lim", "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  charger_volt_lim),   0.1},
+    {"mb_volt_ign",         "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  volt_ign),           0.1},
+    {"mb_soc",              "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  soc),                0.1},
+    {"mb_cell_volt_min",    "%1.3f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  cell_volt_min),    0.001},    
+    {"mb_cell_volt_max",    "%1.3f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  cell_volt_max),    0.001},
+    {"mb_cell_volt_avg",    "%1.3f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  cell_volt_avg),    0.001},
+    {"mb_cell_temp_min",    "%1.1f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  cell_temp_min),      0.1},
+    {"mb_cell_temp_max",    "%1.1f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  cell_temp_max),      0.1},
+    {"mb_cell_temp_avg",    "%1.1f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  cell_temp_avg),      0.1},
+    {"mb_cur_lim_dischrg",  "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  cur_lim_dischrg),    0.1},
+    {"mb_cur_lim_chrg",     "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  cur_lim_chrg),       0.1},
+    {"mb_temp_cool_intake", "%1.0f",  PARAM_TYPE_INT8,   offsetof(mb_struct,  temp_cool_intake),     1},
+    {"mb_temp_cool_outlet", "%1.0f",  PARAM_TYPE_INT8,   offsetof(mb_struct,  temp_cool_outlet),     1},
+    {"mb_temp_air_amb",     "%1.0f",  PARAM_TYPE_INT8,   offsetof(mb_struct,  temp_air_amb),         1},
+    {"mb_temp_air_int",     "%1.0f",  PARAM_TYPE_INT8,   offsetof(mb_struct,  temp_air_int),         1},    
+    {"mb_on",               "%1.0f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  on),                   1},    
+    {"mb_moto",             "%1.0f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  moto),                 1},    
+    {"mb_autonom_run",      "%1.0f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  autonom_run),          1},    
+    {"mb_total_run",        "%1.0f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  total_run),            1},    
+    {"mb_num_of_charges",   "%1.0f",  PARAM_TYPE_INT16,  offsetof(mb_struct,  num_of_charges),       1},    
+    {"mb_speed",            "%1.0f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  speed),                1},
+    {"mb_pki_iso",          "%1.0f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  pki_iso),              1},
+    {"mb_pki_volt",         "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  pki_volt),           0.1},
+    {"mb_soc_kalman",       "%1.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct,  soc_kalman),         0.1},
 
-    {"mb",                  "",  PARAM_TYPE_MB,     offsetof(rec_struct, mb),          0, 0.1, 0},
-    {"mb_cur",         "%3.1f",  PARAM_TYPE_INT16,  offsetof(mb_struct, cur),          0, 0.1, 0},
-    {"mb_volt",        "%3.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct, volt),         0, 0.1, 0},
-    {"mb_volt_bus",    "%3.1f",  PARAM_TYPE_UINT16, offsetof(mb_struct, volt_bus),     0, 0.1, 0},
+    {"sma",                      "",  PARAM_TYPE_SMA,    offsetof(rec_struct, sma),                 0},
+    {"sma_tempA",           "%1.0f",  PARAM_TYPE_INT8,   offsetof(sma_struct, tempA),               1},
+    {"sma_tempB",           "%1.0f",  PARAM_TYPE_INT8,   offsetof(sma_struct, tempA),               1},
+    {"sma_volt",            "%1.3f",  PARAM_TYPE_UINT16, offsetof(sma_struct, volt),            0.001},
 
-
-mb_charger_volt_lim[0]             # максимальное напряжение зарядной станции V
-mb_volt_ign[0]                     # напряжение низковольтной сети V
-mb_soc[0]                          # soc состояние заряда
-mb_cell_volt_min[0]                # минимальное напряжение ячеек mV
-mb_cell_volt_max[0]                # максимальное напряжение ячеек mV
-mb_cell_volt_avg[0]                # среднее напряжение ячеек mV
-mb_cell_temp_min[0]                # максимальная температура ячеек °C
-mb_cell_temp_max[0]                # минимальная температура ячеек °C
-mb_cell_temp_avg[0]                # средняя температура ячеек  °C
-mb_cur_lim_dischrg[0]              # ограничение тока разряда A
-mb_cur_lim_chrg[0]                 # ограничение тока заряда  A
-mb_temp_cool_intake[0]             # температура охлаждающей жидкости на входе СНЭ °C
-mb_temp_cool_outlet[0]             # температура охлаждающей жидкости на выходе СНЭ °C
-mb_temp_air_amb[0]                 # температура воздуха окружающей среды °C
-mb_temp_air_int[0]                 # температура воздуха внутри модуля °C
-
-
-
-    {"sma",                 "",  PARAM_TYPE_SMA,    offsetof(rec_struct, sma),         0, 0, 0},
-    {"sma_tempA",      "%2.1f",  PARAM_TYPE_INT8,   offsetof(sma_struct, tempA),       0, 1, 0},
-    {"sma_volt",       "%2.1f",  PARAM_TYPE_UINT16, offsetof(sma_struct, volt),        0, 0.001, 0},
-    
-
-    {"cell",                "",  PARAM_TYPE_CELL,   offsetof(rec_struct, cell),        0, 0, 0},
-    {"cell_volt",      "%4.3f",  PARAM_TYPE_INT16,  offsetof(cell_struct, volt),       0, 0.001, 0},
-    {"cell_temp",      "%2.0f",  PARAM_TYPE_INT8,   offsetof(cell_struct, temp),       0,   1, 0},
-
-
+    {"cell",                    "",  PARAM_TYPE_CELL,   offsetof(rec_struct, cell),                 0},
+    {"cell_volt",          "%1.3f",  PARAM_TYPE_UINT16, offsetof(cell_struct, volt),            0.001},
+    {"cell_temp",          "%1.0f",  PARAM_TYPE_INT8,   offsetof(cell_struct, temp),                1},
 };
 
 static param_struct param[PARAM_LIST_LENGTH] = {0}; // параметры для выдачи
@@ -86,6 +88,7 @@ bool param_is_ready(char *str) {
     return true;
 }
 //-----------------------------------------------------------------------------
+// в зависимости от числа аргументов
 bool param_is_array(char *str, uint16_t dim[3]) {
     uint32_t c_num = 0;
     uint32_t c[3];
@@ -100,13 +103,12 @@ bool param_is_array(char *str, uint16_t dim[3]) {
     return (c_num > 0) ? true : false;
 }
 //-----------------------------------------------------------------------------
-void param_init(const char *filename) {
+uint8_t param_init(const char *filename) {
     FILE *file = fopen("list_param.cfg", "r");
     if(file == NULL) {
         printf("file list_param.cfg not found \n");
-        return;
+        return 1;
     }
-
     // read list_param.cfg     
     char *line = NULL;
     char *str = NULL;
@@ -124,8 +126,6 @@ void param_init(const char *filename) {
         // если массив то рассчитываем новое значение смещения
         uint16_t dim[3] = {0};
         if(param_is_array(str, dim)) {
-            printf("---- c1:%d c2:%d c3:%d \n", dim[0], dim[1], dim[2]);
-            // определяем смещение массива         
             index = param_find_index(str, '_');
             if(index == -1) continue;
             uint32_t array_offset = param_table[index].start_byte; 
@@ -145,21 +145,17 @@ void param_init(const char *filename) {
     free(line);
     fclose(file);
 
-    printf("par_num: %03d \n", param_num);
-    for (uint32_t i = 0; i < param_num; i++) {
-        printf("select: %s arg: %s start_byte: %04d \n", param[i].param, param[i].sconv, param[i].start_byte);        
-    }
+    if(param_num == 0) return 2;
+    return 0;
 }
 //-----------------------------------------------------------------------------
 char *param_data2str(rec_struct *rec) {    
     bool first_dig = true;
     static char str[1000];
-
     char dig[10];
     float res = 0;
-    sprintf(str, "");
-
     uint64_t pdata;
+    sprintf(str, " ");    
     for (uint32_t i = 0; i < param_num; i++) {
         pdata = (uint64_t)rec + param[i].start_byte;
         switch(param[i].type) {
@@ -167,20 +163,16 @@ char *param_data2str(rec_struct *rec) {
             case PARAM_TYPE_INT8   : res = *((int8_t*)pdata)   * param[i].factor; break;
             case PARAM_TYPE_UINT16 : res = *((uint16_t*)pdata) * param[i].factor; break;
             case PARAM_TYPE_INT16  : res = *((int16_t*)pdata)  * param[i].factor; break;
+            case PARAM_TYPE_UINT32 : res = *((uint32_t*)pdata) * param[i].factor; break;
+            case PARAM_TYPE_INT32  : res = *((int32_t*)pdata)  * param[i].factor; break;
             default : break;
-        }
-
-        
+        }        
         if(!first_dig) 
             strcat(str, ",");
         else
             first_dig = false;
-
-
         sprintf(dig, param[i].sconv, res);
         strcat(str, dig);
-
-                       
     }
     strcat(str, "\n");
     return str;
@@ -189,7 +181,7 @@ char *param_data2str(rec_struct *rec) {
 char *param_header(void) {
     bool first_dig = true;
     static char str[1000];
-
+    sprintf(str, " ");
     for (uint32_t i = 0; i < param_num; i++) {
         if(!first_dig) 
             strcat(str, ",");

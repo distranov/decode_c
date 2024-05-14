@@ -5,7 +5,6 @@
 
 #include "data2file.h"
 
-
 static FILE *ofile = NULL;
 //-----------------------------------------------------------------------------
 uint8_t d2f_open_file(const char *filename) {
@@ -15,7 +14,6 @@ uint8_t d2f_open_file(const char *filename) {
         return 4;
     }
     return 0;
-
 }
 //-----------------------------------------------------------------------------
 void d2f_write(const char *str) {
